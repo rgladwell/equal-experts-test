@@ -1,26 +1,38 @@
 package com.codingtest
 
-sealed trait Direction
+import com.codingtest.codec._
 
-object North extends Direction
-object South extends Direction
-object East extends Direction
-object West extends Direction
+sealed trait Direction {
+  val code: String
+  override def toString = code
+}
+
+object North extends Direction {
+  override val code = "N"
+}
+
+object South extends Direction {
+  override val code = "S"
+}
+
+object East extends Direction {
+  override val code = "E"
+}
+
+object West extends Direction {
+  override val code = "W"
+}
 
 object Direction {
 
-  def apply(direction: String): Direction = direction match {
-    case "N" => North
-    case "S" => South
-    case "E" => East
-    case "W" => West
-    case _ => sys.error(s"no such direction $direction")
+  implicit val directionDecoder: Decoder[Direction] = { direction =>
+    direction match {
+      case "N" => Valid(North)
+      case "S" => Valid(South)
+      case "E" => Valid(East)
+      case "W" => Valid(West)
+      case _ => Invalid(s"no such direction $direction")
+    }
   }
 
-  def toString(direction: Direction): String = direction match {
-    case North => "N"
-    case South => "S"
-    case East => "E"
-    case West => "W"
-  }
 }

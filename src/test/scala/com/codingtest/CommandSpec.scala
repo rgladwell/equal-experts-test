@@ -1,21 +1,22 @@
 package com.codingtest
 
 import org.scalatest._
+import com.codingtest.codec._
 
 class CommandSpec extends WordSpec with Matchers {
 
   "command" should {
 
     "parse left" in {
-      Command('L') shouldBe TurnLeft
+      decode[Command]("L") shouldBe Valid(TurnLeft)
     }
 
     "parse right" in {
-      Command('R') shouldBe TurnRight
+      decode[Command]("R") shouldBe Valid(TurnRight)
     }
 
     "parse move" in {
-      Command('M') shouldBe MoveForward
+      decode[Command]("M") shouldBe Valid(MoveForward)
     }
 
   }

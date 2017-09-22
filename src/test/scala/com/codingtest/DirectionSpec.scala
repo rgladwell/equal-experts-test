@@ -1,29 +1,26 @@
 package com.codingtest
 
 import org.scalatest._
+import com.codingtest.codec._
 
 class DirectionSpec extends WordSpec with Matchers {
 
   "direction" should {
 
     "parse north" in {
-      Direction("N") shouldBe North
+      decode[Direction]("N") shouldBe Valid(North)
     }
 
     "parse east" in {
-      Direction("E") shouldBe East
+      decode[Direction]("E") shouldBe Valid(East)
     }
 
     "parse south" in {
-      Direction("S") shouldBe South
+      decode[Direction]("S") shouldBe Valid(South)
     }
 
     "parse west" in {
-      Direction("W") shouldBe West
-    }
-
-    "toString" in {
-      Direction.toString(West).toString shouldBe "W"
+      decode[Direction]("W") shouldBe Valid(West)
     }
 
   }

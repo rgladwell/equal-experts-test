@@ -9,25 +9,24 @@ object Engine {
   }
 
   private def turnLeft(position: Position): Position = position.direction match {
-    case North => Position(s"${position.x} ${position.y} W")
-    case South => Position(s"${position.x} ${position.y} E")
-    case East => Position(s"${position.x} ${position.y} N")
-    case West => Position(s"${position.x} ${position.y} S")
+    case North => position.copy(direction = West)
+    case South => position.copy(direction = East)
+    case East => position.copy(direction = North)
+    case West => position.copy(direction = South)
   }
 
   private def turnRight(position: Position): Position =  position.direction match {
-    case North => Position(s"${position.x} ${position.y} E")
-    case South => Position(s"${position.x} ${position.y} W")
-    case East => Position(s"${position.x} ${position.y} S")
-    case West => Position(s"${position.x} ${position.y} N")
+    case North => position.copy(direction = East)
+    case South => position.copy(direction = West)
+    case East => position.copy(direction = South)
+    case West => position.copy(direction = North)
   }
 
-
   private def moveForward(position: Position): Position = position.direction match {
-    case North => Position(s"${position.x} ${position.y + 1} ${Direction.toString(position.direction)}")
-    case South => Position(s"${position.x} ${position.y - 1} ${Direction.toString(position.direction)}")
-    case East => Position(s"${position.x + 1} ${position.y} ${Direction.toString(position.direction)}")
-    case West => Position(s"${position.x - 1} ${position.y} ${Direction.toString(position.direction)}")
+    case North => position.copy(y = position.y + 1)
+    case South => position.copy(y = position.y - 1)
+    case East => position.copy(x = position.x + 1)
+    case West => position.copy(x = position.x - 1)
   }
 
 }

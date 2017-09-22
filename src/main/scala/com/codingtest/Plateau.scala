@@ -1,10 +1,23 @@
 package com.codingtest
 
-case class Plateau(plateau: String) {
+import com.codingtest.codec._
+import scala.util.Try
 
-  private val sizes = plateau.split(" ")
+case class Plateau(maxNorth: Int, maxEast: Int)
 
-  val maxNorth: Int = sizes(0).toInt
-  val maxEast: Int = sizes(1).toInt
+object Plateau {
+
+  implicit val plateauDecoder: Decoder[Plateau] = { plateau =>
+    val sizes = plateau.split(" ")
+
+    for {
+      _ <- validate(sizes.size == 2, "not enough values to parse plateau")
+
+      maxNorth <- validate(Try{ sizes(0).toInt } )
+      maxEast <- validate(Try{ sizes(1).toInt } )
+
+    } yield Plateau(maxNorth, maxEast)
+
+  }
 
 }

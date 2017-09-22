@@ -1,27 +1,29 @@
 package com.codingtest
 
 import org.scalatest._
+import com.codingtest.codec._
 
 class PositionSpec  extends WordSpec with Matchers {
 
   "position" should {
 
+    val position = decode[Position]("1 2 N").valid
+
     "parse x position" in {
-      Position("1 2 N").x shouldBe 1
+      position.x shouldBe 1
     }
 
     "parse y position" in {
-      Position("1 2 N").y shouldBe 2
+      position.y shouldBe 2
     }
 
     "parse direction" in {
-      Position("1 2 N").direction shouldBe North
+      position.direction shouldBe North
     }
 
     "toString" in {
-      Position("1 2 N").toString shouldBe "1 2 N"
+      position.toString shouldBe "1 2 N"
     }
-
 
   }
 

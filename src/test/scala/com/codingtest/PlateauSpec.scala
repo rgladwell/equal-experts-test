@@ -1,17 +1,20 @@
 package com.codingtest
 
 import org.scalatest._
+import com.codingtest.codec._
 
 class PlateauSpec extends WordSpec with Matchers {
 
   "plateau" should {
 
+    val plateau = decode[Plateau]("5 4").valid
+
     "parse max north" in {
-      Plateau("5 4").maxNorth shouldBe 5
+      plateau.maxNorth shouldBe 5
     }
 
     "parse max east" in {
-      Plateau("5 4").maxEast shouldBe 4
+      plateau.maxEast shouldBe 4
     }
 
   }

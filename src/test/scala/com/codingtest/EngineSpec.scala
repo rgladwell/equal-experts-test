@@ -7,27 +7,27 @@ class EngineSpec extends WordSpec with Matchers {
   "engine" should {
 
     "turn left" in {
-      Engine.move(Position("0 0 N"), TurnLeft) shouldBe Position("0 0 W")
+      Engine.move(Position(0, 0, North), TurnLeft) shouldBe Position(0, 0, West)
     }
 
     "turn right" in {
-      Engine.move(Position("0 0 N"), TurnRight) shouldBe Position("0 0 E")
+      Engine.move(Position(0, 0, North), TurnRight) shouldBe Position(0, 0, East)
     }
 
     "move forward north" in {
-      Engine.move(Position("0 0 N"), MoveForward) shouldBe Position("0 1 N")
+      Engine.move(Position(0, 0, North), MoveForward) shouldBe Position(0, 1, North)
     }
 
     "move forward south" in {
-      Engine.move(Position("1 1 S"), MoveForward) shouldBe Position("1 0 S")
+      Engine.move(Position(1, 1, South), MoveForward) shouldBe Position(1, 0, South)
     }
 
     "move forward west" in {
-      Engine.move(Position("1 1 W"), MoveForward) shouldBe Position("0 1 W")
+      Engine.move(Position(1, 1, West), MoveForward) shouldBe Position(0, 1, West)
     }
 
     "move forward east" in {
-      Engine.move(Position("1 1 E"), MoveForward) shouldBe Position("2 1 E")
+      Engine.move(Position(1, 1, East), MoveForward) shouldBe Position(2, 1, East)
     }
 
   }
