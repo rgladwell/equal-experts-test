@@ -25,14 +25,12 @@ object West extends Direction {
 
 object Direction {
 
-  implicit val directionDecoder: Decoder[Direction] = { direction =>
-    direction match {
-      case "N" => Valid(North)
-      case "S" => Valid(South)
-      case "E" => Valid(East)
-      case "W" => Valid(West)
-      case _ => Invalid(s"no such direction $direction")
-    }
+  implicit val directionDecoder: Decoder[Direction] = {
+    case "N" => Valid(North)
+    case "S" => Valid(South)
+    case "E" => Valid(East)
+    case "W" => Valid(West)
+    case direction => Invalid(s"no such direction $direction")
   }
 
 }
