@@ -7,7 +7,6 @@ package object codec {
   sealed trait Validation[+A] {
 
     def valid: A
-    val isValid: Boolean
 
     def filter(p: (A) => Boolean): Validation[A] = this match {
       case Invalid(_) => this
@@ -30,14 +29,12 @@ package object codec {
   case class Invalid(error: String) extends Validation[Nothing] {
 
     override def valid = sys.error(s"invalid: $error")
-    override val isValid = false
 
   }
 
   case class Valid[A](value: A) extends Validation[A] {
 
     override def valid = value
-    override val isValid = true
 
   }
 
