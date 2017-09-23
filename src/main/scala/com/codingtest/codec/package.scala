@@ -11,7 +11,7 @@ package object codec {
     def filter(p: (A) => Boolean): Validation[A] = this match {
       case Invalid(_) => this
       case Valid(value) if p(value)  => this
-      case _ => Invalid("filtered invalid by $p")
+      case _ => Invalid(s"filtered invalid by $p")
     }
 
     final def map[B](f: A => B): Validation[B] = this match {

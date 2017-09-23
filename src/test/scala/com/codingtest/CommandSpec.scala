@@ -19,6 +19,10 @@ class CommandSpec extends WordSpec with Matchers {
       decode[Command]("M") shouldBe Valid(MoveForward)
     }
 
+    "not parse invalid command" in {
+      decode[Command]("X") shouldBe an[Invalid]
+    }
+
   }
 
 }

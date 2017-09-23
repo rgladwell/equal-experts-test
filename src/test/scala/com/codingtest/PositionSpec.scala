@@ -21,10 +21,29 @@ class PositionSpec  extends WordSpec with Matchers {
       position.direction shouldBe North
     }
 
-    "toString" in {
+    "convert back to string" in {
       position.toString shouldBe "1 2 N"
     }
 
+    "not parse position with too few values" in {
+      decode[Position]("1 2") shouldBe an[Invalid]
+    }
+
+    "not parse position with too many values" in {
+      decode[Position]("1 2 N 1") shouldBe an[Invalid]
+    }
+
+    "not parse position non numeric x value" in {
+      decode[Position]("X 2 N") shouldBe an[Invalid]
+    }
+
+    "not parse position non numeric y value" in {
+      decode[Position]("1 Y N") shouldBe an[Invalid]
+    }
+
+    "not parse position invalid direcion" in {
+      decode[Position]("1 2 3") shouldBe an[Invalid]
+    }
   }
 
 }

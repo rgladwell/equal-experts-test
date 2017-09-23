@@ -23,6 +23,10 @@ class DirectionSpec extends WordSpec with Matchers {
       decode[Direction]("W") shouldBe Valid(West)
     }
 
+    "not parse invalid direction" in {
+      decode[Direction]("X") shouldBe an[Invalid]
+    }
+
   }
 
 }
